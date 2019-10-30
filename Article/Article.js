@@ -112,3 +112,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function ArticleMaker(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+    //Create Elements
+    const articleContainer = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+    const articleDate = document.createElement('p');
+    const paragraph1 = document.createElement('p');
+    const paragraph2 = document.createElement('p');
+    const paragraph3 = document.createElement('p');
+    const button = document.createElement('span');
+
+    //ClassNames
+    articleContainer.classList.add('article');
+    articleDate.classList.add('date');
+    button.classList.add('expandButton');
+
+    //Text Content
+    articleTitle.textContent = title;
+    articleDate.textContent = date;
+    paragraph1.textContent = firstParagraph;
+    paragraph2.textContent = secondParagraph;
+    paragraph3.textContent = thirdParagraph;
+    button.textContent = 'Expand';
+
+    //Event Listener
+    button.addEventListener('click', () => {
+        articleContainer.classList.toggle('article-open');
+    })
+
+    //Page Structure
+    articleContainer.appendChild(articleTitle);
+    articleContainer.appendChild(articleDate);
+    articleContainer.appendChild(paragraph1);
+    articleContainer.appendChild(paragraph2);
+    articleContainer.appendChild(paragraph3);
+    articleContainer.appendChild(button);
+
+    return articleContainer;
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach((text) => {
+    articles.appendChild(ArticleMaker(text.title, text.date, text.firstParagraph, text.secondParagraph, text.thirdParagraph));
+});
