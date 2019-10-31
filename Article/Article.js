@@ -85,7 +85,17 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+    {
+        title: 'Are Crash Courses, in Coding, Better than Full Courses?',
+        date: 'Feb 10, 2019',
+        firstParagraph: `If there is one thing I have learned in my seven-month-long journey as a Developer, as long as you have the basics of HTML, CSS, and JavaScript, all of these other frameworks do not take long to master. I am going to tell you a quick story and then you tell me if crash courses are better than full courses. A couple of months ago, I was approached by a classmate to collaborate on a project, he was working on for a client. It was the development of an auto -trade website, https://github.com/Code4Blessings/gh-trade The framework of this site was…I’m not sure how to even put this into words. Let’s just say there was nothing in that line of code that I recognized. It looked like React.js and CSS. Close but no cigar. This was a combination of Node.js, Next.js, and Sass. The guy told me if I understood React and CSS, this could work. He told me that as long as I knew React and CSS, I could do this and he only wanted me to design the footer component.`,
+
+        secondParagraph: `Let me tell you when I cloned this site from his Github account, I couldn’t even get it to load up on my computer. All I got were a series of error messages.  After working with my partner to troubleshoot and fix the problem, we hit a dead end and decided maybe this collaboration wasn’t going to work. I hated walking away from this project, so I decided to browse through Youtube searching for crash courses on Sass, and Next.js. After I had what I needed from this video, https://www.youtube.com/watch?v=gYzHS-n2gqU&t=1093s
+        building and constructing the footer component took just under a few hours.`,
+
+        thirdParagraph: `So what was the point of this story? That we don’t need to empty our pockets on loads of tech knowledge? Or spend countless hours learning it? In my opinion, there is no right or wrong answer to this. From my experience, after you master HTML, CSS, and JavaScript, all the other frameworks aren’t that difficult to learn because they are all deviated from those three. It’s like learning how to cook. HTML is the recipe, JavaScript is the cooking method, and CSS is the presentation. That, in my opinion, is the only piece that requires a full course. The rest, in my opinion, you can do whatever you want. It all depends on what you’re cooking or building in this case. But don’t just take my word for it. Happy trails my bright developers.`
+    }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -112,3 +122,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function ArticleMaker(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+    //Create Elements
+    const articleContainer = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+    const articleDate = document.createElement('p');
+    const paragraph1 = document.createElement('p');
+    const paragraph2 = document.createElement('p');
+    const paragraph3 = document.createElement('p');
+    const button = document.createElement('span');
+
+    //ClassNames
+    articleContainer.classList.add('article');
+    articleDate.classList.add('date');
+    button.classList.add('expandButton');
+
+    //Text Content
+    articleTitle.textContent = title;
+    articleDate.textContent = date;
+    paragraph1.textContent = firstParagraph;
+    paragraph2.textContent = secondParagraph;
+    paragraph3.textContent = thirdParagraph;
+    button.textContent = 'Expand';
+
+    //Event Listener
+    button.addEventListener('click', () => {
+        articleContainer.classList.toggle('article-open');
+    })
+
+    //Page Structure
+    articleContainer.appendChild(articleTitle);
+    articleContainer.appendChild(articleDate);
+    articleContainer.appendChild(paragraph1);
+    articleContainer.appendChild(paragraph2);
+    articleContainer.appendChild(paragraph3);
+    articleContainer.appendChild(button);
+
+    return articleContainer;
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach((text) => {
+    articles.appendChild(ArticleMaker(text.title, text.date, text.firstParagraph, text.secondParagraph, text.thirdParagraph));
+});
